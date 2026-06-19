@@ -1,44 +1,39 @@
 name: Selenium Tests
 
 on:
-  workflow_dispatch:
+workflow_dispatch:
 
 jobs:
-  selenium-test:
-    runs-on: ubuntu-latest
+selenium-test:
+runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+```
+defaults:
+  run:
+    working-directory: auralis-selenium-real
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+steps:
+  - name: Checkout Repository
+    uses: actions/checkout@v4
 
-      - name: Install Dependencies
-        run: npm install
+  - name: Setup Node.js
+    uses: actions/setup-node@v4
+    with:
+      node-version: 24
 
-      - name: Create .env
-        run: |
-          echo "VITE_BASE44_APP_ID=${{ secrets.VITE_BASE44_APP_ID }}" >> .env
-          echo "VITE_BASE44_FUNCTIONS_VERSION=${{ secrets.VITE_BASE44_FUNCTIONS_VERSION }}" >> .env
-          echo "VITE_BASE44_APP_BASE_URL=${{ secrets.VITE_BASE44_APP_BASE_URL }}" >> .env
+  - name: Install Dependencies
+    run: npm install
 
-      - name: Start Application
-        run: |
-          npm run dev &
-          sleep 20
+  - name: Install Chrome
+    uses: browser-actions/setup-chrome@v1
 
-      - name: Install Chrome
-        uses: browser-actions/setup-chrome@v1
+  - name: Run Selenium Tests
+    run: |
+      npx mocha tests/*.js --reporter mochawesome
 
-      - name: Run Selenium Tests
-        run: |
-          npx mocha tests/*.js --reporter mochawesome
-
-      - name: Upload Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: mochawesome-report
-          path: mochawesome-report/
+  - name: Upload Report
+    uses: actions/upload-artifact@v4
+    with:
+      name: mochawesome-report
+      path: auralis-selenium-real/mochawesome-report/
+```
