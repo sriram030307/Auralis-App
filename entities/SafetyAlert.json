@@ -1,0 +1,47 @@
+{
+  "name": "SafetyAlert",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "sos",
+        "check_in",
+        "geofence",
+        "ai_alert",
+        "fake_call"
+      ],
+      "description": "Alert type"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "resolved",
+        "cancelled"
+      ],
+      "default": "active"
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "address": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "contacts_notified": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "type"
+  ]
+}

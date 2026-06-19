@@ -1,0 +1,22 @@
+{
+  "name": "auralis-selenium-real",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "chai": "^6.2.2",
+    "chromedriver": "^149.0.3",
+    "fs-extra": "^11.3.5",
+    "mocha": "^11.7.6",
+    "mochawesome": "^7.1.4",
+    "selenium-webdriver": "^4.45.0",
+    "xlsx": "^0.18.5"
+  }
+}
