@@ -1,38 +1,36 @@
 name: Selenium Tests
 
 on:
-workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
-selenium-test:
-runs-on: ubuntu-latest
+  selenium-test:
+    runs-on: ubuntu-latest
 
-```
-defaults:
-  run:
-    working-directory: auralis-selenium-real
+    defaults:
+      run:
+        working-directory: auralis-selenium-real
 
-steps:
-  - name: Checkout Repository
-    uses: actions/checkout@v4
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-  - name: Setup Node.js
-    uses: actions/setup-node@v4
-    with:
-      node-version: 24
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
 
-  - name: Install Dependencies
-    run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-  - name: Install Chrome
-    uses: browser-actions/setup-chrome@v1
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
 
-  - name: Run Selenium Tests
-    run: npx mocha tests/*.js --reporter mochawesome
+      - name: Run Selenium Tests
+        run: npx mocha tests/*.js --reporter mochawesome
 
-  - name: Upload Report
-    uses: actions/upload-artifact@v4
-    with:
-      name: mochawesome-report
-      path: auralis-selenium-real/mochawesome-report/
-```
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-report
+          path: auralis-selenium-real/mochawesome-report/
